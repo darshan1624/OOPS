@@ -49,9 +49,16 @@ Value of attribute remains same for all objects.
 	s1 = Student()
 	s1.college ==> 'IITB'
 
+What are three types of method in class?
+Static Method
+Class Method
+Instance Method - Normal methods that use self.
 
 Static  Methods
 Methods that dont use the self parameter (works at class level).
+static methods cannot modify object, class attributes. Also cannot access 
+class methods. 
+Used when we want to use function which wont change for any object.
 
 How to define static methods in class?
 class Student:
@@ -62,6 +69,45 @@ class Student:
 	//here college is a static method.
 	//Should use @staticmethod decorator, if not using self in parameter.
 
+How to change class attributes ?
+	class Student:
+		name = 'anonymous'
+		def changeName(self,name):
+			self.name = name
+	p1 = Person()
+	p1.changeName(Amit)
+	print(p1.name, Person.name) ==> (Amit, anonymous)
+	// didnt change class atribute 
+		
+		def changeName(self,name):
+			Person.name = name
+
+	print(p1.name, Person.name) ==> (Amit, Amit)
+	// changed class atribute. 
+	// Also, .__class__.name will change.
+			
+		def changeName(self,name):
+			self.__class__.name = name
+
+Another way to change class atributes is by using class methods.
+
+Class Method - class Method is defined inside the class which take class as 
+	a 1st argument. 
+It use decorator @classmethod
+Used when we want to chnage only class attributes.	
+	e.g.: 
+	class Student:
+		name = anonymous
+		@classmethod
+		def  changeName(cls,name):
+			cls.name = name
+
+	print(p1.name, Person.name) ==> (Amit, Amit)
+
+Other decorators:
+@property
+getter
+setter
 
 Four pillars of oops:
 Abstraction - Hiding the implementation details of a class and only showing 
@@ -94,3 +140,47 @@ e.g.:
 	print(p1.welcome())
 
 	// Here __name is private attritbute. __hello is private method.
+
+
+Inheritance - When one class derives the properties and methods of another 
+	class.
+	e.g.: R.E. bikes has defined logic for start, stop. Then these
+		same methods can be inherited for another bikes.
+Types: 
+	Single, Multi, Multiple 
+
+super() - super() method is used to access methods of the parent class.
+	e.g.:
+	class Bike:
+		def __init__(self, type): 
+			self.type = type
+		@staticmethod
+		def start():
+			print('bike started')
+		@staticmethod
+		def stop():
+			print('bike stoped')
+	
+	class RoyalEnfield(Bike):
+		def __init__(self, name, type):
+			super().__init__(type)
+			self.name = name
+			// super().start() can also call other functions
+	
+	b1 = RoyalEnfield(Himaliyan, NonElectric)
+
+
+Polymorphism - Same operator having different meaning in differnet context.
+	e.g.: +
+	we can also change the meaning of + using dundder methods. 
+	def __add__() in class. Also, can do for other opeartors.
+
+*method oveloading
+*method overridding
+
+
+
+	
+
+
+
