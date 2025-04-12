@@ -1,0 +1,96 @@
+OOPS Concept
+
+class - Class is a blueprint for object.
+	class has attribute and methods. 
+	Attributes are like properites and method is like what all it can do.
+	e.g.: attributes: Bike color, mielage, engine cc, tyre size etc.
+		methods: How bike starts, stops, how engine starts.
+
+Object- Object is a instance of a class.
+
+How to create class and object? 
+	class Student:
+		name = rahul
+	
+	s1 = Student()
+	s1.name ==> rahul
+
+Constructor - All classes have a function called __init__(), which gets 
+	excuted whenever the object is created.
+
+	class Student:
+		def __init__(self,fullname):
+			self.name = fullname
+
+	s1 = Student('Amit')
+	s1.name ==> 'Amit'
+
+self -The self parameter is a reference to the current instance of the class.
+      It is used to access variables that belongs to the class.
+
+
+class & object attributes
+object attributes are those which are defined with self.
+Object attribute is created and occupies space whenever a new object is 
+created. 
+	e.g. self.name = name
+	
+
+class attribute is set only once when class is defined Or when the script is 
+run and dont use self.
+ 
+Value of attribute remains same for all objects.
+	e.g.: 
+	class Student:
+		college = 'IITB'
+		def __init__(self,fullname):
+			self.name = fullname
+
+	s1 = Student()
+	s1.college ==> 'IITB'
+
+
+Static  Methods
+Methods that dont use the self parameter (works at class level).
+
+How to define static methods in class?
+class Student:
+	@staticmethod
+	def college():
+		print('IITB college')
+
+	//here college is a static method.
+	//Should use @staticmethod decorator, if not using self in parameter.
+
+
+Four pillars of oops:
+Abstraction - Hiding the implementation details of a class and only showing 
+essential features to the user.
+	e.g. car owner has access to s1.start() function but dont know how 
+		this method is implemnted in class.
+
+Encapsulation - Wrapping data and functions into single unit.
+		e.g. encapsulation is done in class (bundles attibutes
+		and methods together). 
+		Object uses that encapsulation.
+
+
+del - del keyword is used to delete object properties or object itself.
+
+
+private attributes and methods
+Private attribute and methods are meant to be used only within the
+class and not accessible from outside the class.
+
+to create private attribute, methods use __ double underscore.
+e.g.: 
+	class Person:
+		__name == 'anonymous'
+		def __hello(self):
+			print('hello person named', __name)
+		def welcome(self):
+			self.hello()
+	p1 = Person()
+	print(p1.welcome())
+
+	// Here __name is private attritbute. __hello is private method.
