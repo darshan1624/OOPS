@@ -1,12 +1,45 @@
+procedural programming (POP), Object Oriented progrmaming (OOPS), class, class example, object, How to create class, constructor, self, 
+	class & object attributes, types of method in class
+Four pillars of oops, abstarction, encapsulation, inheirtance, super() method, polymorphism
+
+
+
 OOPS Concept
 
-class - Class is a blueprint for object.
-	class has attribute and methods. 
-	Attributes are like properites and method is like what all it can do.
-	e.g.: attributes: Bike color, mielage, engine cc, tyre size etc.
-		methods: How bike starts, stops, how engine starts.
+procedural programming (POP): It is a very linear approach of solving problem.
+	Programm is divided into multiple functions. 
+	These fucntions are interdependent. Each function has global, local 
+	data. Global data is mutable by any function. So, data is not secure.
+	Applications which require actively updated and maintainance. Then, 
+	POP is not suitable. beause of interdependecy between functions. so, 
+	scalaibilty is not there.
+	Beacuse of above reasons we shift to OOPS.
 
-Object- Object is a instance of a class.
+Object Oriented progrmaming (OOPS): OOps is a way of organising code that 
+uses classes and objects to represnt real world entities and their beahvior.
+It is a particular style of a programming.
+We wrap data and function together in object. so, now rather than functions
+object can interact with each other.
+To create large scalable website, application oops is suitable.
+
+	 
+
+
+class - Class is a blueprint for object.
+	class is a user defined datatype, that has attribute and methods. 
+	Attributes are like properites and method are operations that it can 
+	do.
+	e.g.:1) attributes: Bike color, mielage, engine cc, tyre size etc.
+		methods: How bike starts, stops, how engine starts.
+	e.g.:2) Suppose a class is a prototype of building. A building 
+		contains all the details about floor, rooms, door, windows.
+		We can create as many buildings as we want, based on these 
+		details. Hence, the building can be seen as a class, and 
+		we can create many objects of these class.
+
+
+Object- Object is a instance of a class. It represnts a specific 
+	implementation of a class and holds its own data.
 
 How to create class and object? 
 	class Student:
@@ -17,6 +50,7 @@ How to create class and object?
 
 Constructor - All classes have a function called __init__(), which gets 
 	excuted whenever the object is created.
+	object attributes are initilaised in constructor. 
 
 	class Student:
 		def __init__(self,fullname):
@@ -26,7 +60,7 @@ Constructor - All classes have a function called __init__(), which gets
 	s1.name ==> 'Amit'
 
 self -The self parameter is a reference to the current instance of the class.
-      It is used to access variables that belongs to the class.
+      It is used to access attributes that belongs to the class.
 
 
 class & object attributes
@@ -91,7 +125,7 @@ How to change class attributes ?
 
 Another way to change class atributes is by using class methods.
 
-Class Method - class Method is defined inside the class which take class as 
+Class Method - class Method is defined inside the class which take cls as 
 	a 1st argument. 
 It use decorator @classmethod
 Used when we want to chnage only class attributes.	
@@ -112,17 +146,122 @@ setter
 Four pillars of oops:
 Abstraction - Hiding the implementation details of a class and only showing 
 essential features to the user.
-	e.g. car owner has access to s1.start() function but dont know how 
+User is familiar with what the function does but not how it does.
+	e.g.:1) car owner has access to s1.start() function but dont know how 
 		this method is implemnted in class.
+	e.g.:2) TV remote. We only know that + increase the volume but dont 
+		know how it does. 
+
+Abstract class
+An abstract class is a classs which cannot instantiated.
+It acts as a blueprint for other classes.
+All the abstarct methods must be implemented derived child class.
+python provides abc module to implement abstract classes. 
+
+	from abc import ABC, @abstractmethod
+	// using just @abstractmethod wont create the class abstract. It 
+	// must inherit ABC class. 
+
+	class Animal(ABC):
+		@abstractmethod
+		def sound(self):
+			pass
+
+	class Dog(Animal):
+		def sound(self):
+			return "Bark"
+	dog = Dog()
+	print(dog.sound())
+	
+abstract method - abstract method are methods that are defined in an abstact
+		class but donot have implementation.  
+		They serve as as blueprint for the subsclasses, ensuring that
+		the subclasses has their own implemntation.
+
+abstract property - are methods which act like a property or attribute.
+
+	class Animal(ABC):
+		@property
+		@abstactmethod 
+		def species(self):
+			pass
+		
+	class Dog(Animal):
+		@property
+		def species(self):
+			return 'Canine'
+	
+	dog = Dog()
+	print(dog.species) //act as property
+
+
 
 Encapsulation - Wrapping data and functions into single unit.
-		e.g. encapsulation is done in class (bundles attibutes
+		e.g.:1) encapsulation is done in class (bundles attibutes
 		and methods together). 
 		Object uses that encapsulation.
+		Encapsulation prevents data modification acciddentally by 
+		limiting access to varaibles and methods.
+		e.g.:2) There are many sections in a company, such as the 
+		sales and finance sections.
+		The finance section manages all financial transactions and 
+		keeps track of all data. The sales section also handles all 
+		sales-related activities. 
+		Sometimes, a finance official may need all sales data for a 
+		specific month. In this instance, he is not permitted to 
+		access the data from the sales section.
+		First, he will need to contact another officer from the sales
+	 	section to request the data. This is encapsulation. 
+		The data for the sales section, as well as the employees who 
+		can manipulate it, are all wrapped together under the single 
+		name "sales section".
+		Encapsulation is another way to hide data.
+		
+Advantages of encapsulation
+Encapsulation hides internal state (attribute values) of an object. 
+It requires all interactions to be performed with objects.
+This approach provides 
+	Provides better control over the data.
+	prevents accidental mdification of the data.
+	promotes modular programming. 
+
+e.g.: 	
+The bank account is a great example for encapsulation. Bank balance is kept 
+private. 
+You cannot chnage balance directly by assigning value. You have to follow 
+rules either deposit or withdraw.
+
+class BankAccount:
+    def __init__(self, balance):
+        self.__balance = balance  # internal state (private)
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+        else:
+            print("Insufficient balance")
+
+    def get_balance(self):  # public method to access private variable
+        return self.__balance
+
+b1 = BankAccount(100)
+b1.deposit(20)
+b1.withdraw(40)
+b1.get_balance() -->80
 
 
 del - del keyword is used to delete object properties or object itself.
 
+Encapsulation is pefromed with the help of public, protected, private members.
+public attributes - can be modifided and accessbile outside the class.
+
+protected attributes - are identified with single _ underscore. Meant to be 
+accessed within the class or its subclasses.
+		self._age = 24
 
 private attributes and methods
 Private attribute and methods are meant to be used only within the
@@ -135,7 +274,7 @@ e.g.:
 		def __hello(self):
 			print('hello person named', __name)
 		def welcome(self):
-			self.hello()
+			self.__hello()
 	p1 = Person()
 	print(p1.welcome())
 
@@ -143,11 +282,13 @@ e.g.:
 
 
 Inheritance - When one class derives the properties and methods of another 
-	class.
+	class it is called inheitance.
+	Inheritance provides code resuabiltiy. Can use existing class to 
+	create new class instead of creating from scratch.
 	e.g.: R.E. bikes has defined logic for start, stop. Then these
 		same methods can be inherited for another bikes.
 Types: 
-	Single, Multi, Multiple 
+	Single, Multi, Multiple, Hierarchial, Hybrid
 
 super() - super() method is used to access methods of the parent class.
 	e.g.:
@@ -170,14 +311,75 @@ super() - super() method is used to access methods of the parent class.
 	b1 = RoyalEnfield(Himaliyan, NonElectric)
 
 
-Polymorphism - Same operator having different meaning in differnet context.
-	e.g.: +
-	we can also change the meaning of + using dundder methods. 
-	def __add__() in class. Also, can do for other opeartors.
+Polymorphism - Ploymorphism means having multiple forms.
+	Polymorphism allows methods to have same name but different behaviour
+	in different context of object.
 
-*method oveloading
-*method overridding
+	We can achieve Polymorphism through method overriding or overloading.
+	
+	e.g.: 
+	operator + has different meaning in differnet context.
+	2+2 = 4, [2] + [2] = [2,2]
+	len('abcd') == 4, len([1,2,3,4]) ==> 4 len is used for string, list
 
+Types of Polymorphism
+Compile time polymorphism
+	This type of polymorphism is determined during compilation of the 
+	program.
+	It allows methods or operators with the same name to behave 
+	differnetly based on their input parameters.
+	It is commonly refered to as method or operator overloading.
+Run time polymorphism
+	This type of polymorphism is determined during the execution of the 
+	program. 
+	It occurs when subclass provides a specific implementation for a 
+	method already defined in its parent class.
+	It is commonly reffered as method overriding.
+	
+
+
+what is meta class ? 
+
+
+extra info:
+To list attributes of an object we have following options.
+-vars()
+-dir()
+
+class emp:
+    def __init__(self):
+        self.name = 'xyz'
+        self.salary = 4000
+
+    def show(self):
+        print(self.name)
+        print(self.salary)
+
+e1 = emp()
+print("Dictionary form :", vars(e1)) --> {'salary': 4000, 'name': 'xyz'}
+print(dir(e1)) --> ['__doc__', '__init__', '__module__', 'name', 'salary',
+			'show']
+
+
+Inner class- Nested class can also be created in python.
+e.g.:
+	class Person:
+		def __init__(self):
+			self.name = name
+			self.age = age
+			self.student = self.Student()
+		def sleep(self):
+			print('sleeps for 8 hours')
+		
+		class Student:
+			def __init__(self):
+				self.rollno = 20
+				self.major = 'Engineering'
+			def study(self):
+				print('studying')
+
+	//mulilevel, multiple inner class are possible
+ 
 
 
 	
